@@ -24,4 +24,8 @@ Tuple operator*(double a, const Tuple &t) {
   return Tuple(a * t.x(), a * t.y(), a * t.z(), a * t.w());
 }
 Tuple normalize(Tuple a) { return a / a.magnitude(); }
+
+double dot(const Tuple &a, const Tuple &b) {
+  return a.x() * b.x() + a.y() * b.y() + a.z() * b.z() + a.w() * b.w();
+}
 } // namespace RTC

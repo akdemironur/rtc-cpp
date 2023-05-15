@@ -32,4 +32,5 @@ extern Tuple operator*(double a, const Tuple &t);
 extern Tuple Vector(double x, double y, double z);
 extern Tuple Point(double x, double y, double z);
 extern Tuple normalize(Tuple a);
+extern double dot(const Tuple &a, const Tuple &b);
 } // namespace RTC
