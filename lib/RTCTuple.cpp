@@ -17,4 +17,9 @@ Tuple operator-(const Tuple &a, const Tuple &b) {
   return Tuple(a.x() - b.x(), a.y() - b.y(), a.z() - b.z(), a.w() - b.w());
 }
 
+Tuple operator*(const Tuple &t, double a) { return a * t; }
+
+Tuple operator*(double a, const Tuple &t) {
+  return Tuple(a * t.x(), a * t.y(), a * t.z(), a * t.w());
+}
 } // namespace RTC
