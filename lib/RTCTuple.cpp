@@ -28,4 +28,9 @@ Tuple normalize(Tuple a) { return a / a.magnitude(); }
 double dot(const Tuple &a, const Tuple &b) {
   return a.x() * b.x() + a.y() * b.y() + a.z() * b.z() + a.w() * b.w();
 }
+
+Tuple cross(const Tuple &a, const Tuple &b) {
+  return Vector(a.y() * b.z() - a.z() * b.y(), a.z() * b.x() - a.x() * b.z(),
+                a.x() * b.y() - a.y() * b.x());
+}
 } // namespace RTC
