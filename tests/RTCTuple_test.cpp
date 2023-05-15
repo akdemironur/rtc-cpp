@@ -81,3 +81,10 @@ TEST_CASE("Tuple, dot product", "[Tuple]") {
   auto b = RTC::Vector(2, 3, 4);
   REQUIRE_THAT(RTC::dot(a, b), Catch::Matchers::WithinAbs(20, 1e-8));
 }
+
+TEST_CASE("Tuple, cross product", "[Tuple]") {
+  auto a = RTC::Vector(1, 2, 3);
+  auto b = RTC::Vector(2, 3, 4);
+  REQUIRE(RTC::cross(a, b) == RTC::Vector(-1, 2, -1));
+  REQUIRE(RTC::cross(b, a) == RTC::Vector(1, -2, 1));
+}
