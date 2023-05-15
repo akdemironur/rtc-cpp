@@ -27,7 +27,9 @@ extern bool operator==(const Tuple &a, const Tuple &b);
 extern Tuple operator+(const Tuple &a, const Tuple &b);
 extern Tuple operator-(const Tuple &a, const Tuple &b);
 extern Tuple operator*(const Tuple &t, double a);
+extern Tuple operator/(const Tuple &t, double a);
 extern Tuple operator*(double a, const Tuple &t);
 extern Tuple Vector(double x, double y, double z);
 extern Tuple Point(double x, double y, double z);
+extern Tuple normalize(Tuple a);
 } // namespace RTC
