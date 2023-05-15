@@ -17,12 +17,12 @@ FetchContent_MakeAvailable(Catch2)
 
 include_directories (${CMAKE_SOURCE_DIR}/include)
 
-add_library             ( DummyLib lib/DummyLib.cpp)
-target_link_libraries   ( DummyLib )
+add_library             ( RTCTuple lib/RTCTuple.cpp )
+target_link_libraries   ( RTCTuple )
 
-add_executable(DummyTest tests/DummyTest.cpp)
-target_link_libraries(DummyTest PRIVATE Catch2::Catch2WithMain DummyLib )
-add_test(NAME DummyTest COMMAND DummyTest)
+add_executable( RTCTuple_test tests/RTCTuple_test.cpp )
+target_link_libraries( RTCTuple_test PRIVATE Catch2::Catch2WithMain RTCTuple )
+add_test( NAME RTCTuple_test COMMAND RTCTuple_test )
 
-add_executable          ( rtc src/rtc.cpp )
-target_link_libraries   ( rtc DummyLib )
+add_executable          ( RTC src/RTC.cpp )
+target_link_libraries   ( RTC RTCTuple )
