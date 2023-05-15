@@ -13,4 +13,8 @@ Tuple operator+(const Tuple &a, const Tuple &b) {
   return Tuple(a.x() + b.x(), a.y() + b.y(), a.z() + b.z(), a.w() + b.w());
 }
 
+Tuple operator-(const Tuple &a, const Tuple &b) {
+  return Tuple(a.x() - b.x(), a.y() - b.y(), a.z() - b.z(), a.w() - b.w());
+}
+
 } // namespace RTC

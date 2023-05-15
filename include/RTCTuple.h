@@ -20,6 +20,7 @@ private:
 
 extern bool operator==(const Tuple &a, const Tuple &b);
 extern Tuple operator+(const Tuple &a, const Tuple &b);
+extern Tuple operator-(const Tuple &a, const Tuple &b);
 extern Tuple Vector(double x, double y, double z);
 extern Tuple Point(double x, double y, double z);
 } // namespace RTC
