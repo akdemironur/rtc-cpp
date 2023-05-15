@@ -17,8 +17,10 @@ FetchContent_MakeAvailable(Catch2)
 
 include_directories (${CMAKE_SOURCE_DIR}/include)
 
+add_library             ( RTCCommon lib/RTCCommon.cpp )
+target_link_libraries   ( RTCCommon )
 add_library             ( RTCTuple lib/RTCTuple.cpp )
-target_link_libraries   ( RTCTuple )
+target_link_libraries   ( RTCTuple RTCCommon)
 
 add_executable( RTCTuple_test tests/RTCTuple_test.cpp )
 target_link_libraries( RTCTuple_test PRIVATE Catch2::Catch2WithMain RTCTuple )
