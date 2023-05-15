@@ -13,6 +13,7 @@ public:
 
   bool isPoint() { return approxEqual(e[3], 1.0); }
   bool isVector() { return approxEqual(e[3], 0.0); }
+  Tuple operator-() const { return Tuple(-e[0], -e[1], -e[2], -e[3]); }
 
 private:
   double e[4];
