@@ -39,3 +39,10 @@ TEST_CASE("Tuple, subtraction", "[Tuple]") {
   REQUIRE((p1 - v2) == RTC::Point(-2, -4, -6));
   REQUIRE((v1 - v2) == RTC::Vector(-2, -4, -6));
 }
+TEST_CASE("Tuple, negating", "[Tuple]") {
+  auto zero = RTC::Vector(0, 0, 0);
+  auto v = RTC::Vector(1, -2, 3);
+  RTC::Tuple a(1, -2, 3, -4);
+  REQUIRE((zero - v) == RTC::Vector(-1, 2, -3));
+  REQUIRE(-a == RTC::Tuple(-1, 2, -3, 4));
+}
