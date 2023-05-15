@@ -30,3 +30,10 @@ TEST_CASE("Tuple, addition", "[Tuple]") {
   RTC::Tuple a2(-2, 3, 1, 0);
   REQUIRE((a1 + a2) == RTC::Tuple(1, 1, 6, 1));
 }
+TEST_CASE("Tuple, subtraction", "[Tuple]") {
+  auto p1 = RTC::Point(3, 2, 1);
+  auto p2 = RTC::Point(5, 6, 7);
+  auto v = RTC::Vector(5, 6, 7);
+  REQUIRE((p1 - p2) == RTC::Vector(-2, -4, -6));
+  REQUIRE((p1 - v) == RTC::Point(-2, -4, -6));
+}
