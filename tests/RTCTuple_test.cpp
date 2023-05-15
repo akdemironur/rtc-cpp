@@ -75,3 +75,9 @@ TEST_CASE("Tuple, normalization", "[Tuple]") {
   auto norm = RTC::normalize(v);
   REQUIRE_THAT(norm.magnitude(), Catch::Matchers::WithinAbs(1, 1e-8));
 }
+
+TEST_CASE("Tuple, dot product", "[Tuple]") {
+  auto a = RTC::Vector(1, 2, 3);
+  auto b = RTC::Vector(2, 3, 4);
+  REQUIRE_THAT(RTC::dot(a, b), Catch::Matchers::WithinAbs(20, 1e-8));
+}
