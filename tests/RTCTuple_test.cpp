@@ -55,13 +55,23 @@ TEST_CASE("Tuple, multiplication with scalar", "[Tuple]") {
 }
 TEST_CASE("Tuple, magnitude", "[Tuple]") {
   auto v = RTC::Vector(1, 0, 0);
-  REQUIRE(v.magnitude() == 1);
+  REQUIRE_THAT(v.magnitude(), Catch::Matchers::WithinAbs(1, 1e-8));
   v = RTC::Vector(0, 1, 0);
-  REQUIRE(v.magnitude() == 1);
+  REQUIRE_THAT(v.magnitude(), Catch::Matchers::WithinAbs(1, 1e-8));
   v = RTC::Vector(0, 0, 1);
-  REQUIRE(v.magnitude() == 1);
+  REQUIRE_THAT(v.magnitude(), Catch::Matchers::WithinAbs(1, 1e-8));
   v = RTC::Vector(1, 2, 3);
-  REQUIRE(v.magnitude() == std::sqrt(14));
+  REQUIRE_THAT(v.magnitude(), Catch::Matchers::WithinAbs(std::sqrt(14), 1e-8));
   v = RTC::Vector(-1, -2, -3);
-  REQUIRE(v.magnitude() == std::sqrt(14));
+  REQUIRE_THAT(v.magnitude(), Catch::Matchers::WithinAbs(std::sqrt(14), 1e-8));
+}
+
+TEST_CASE("Tuple, normalization", "[Tuple]") {
+  auto v = RTC::Vector(4, 0, 0);
+  REQUIRE(RTC::normalize(v) == RTC::Vector(1, 0, 0));
+  v = RTC::Vector(1, 2, 3);
+  auto sqrt14 = std::sqrt(14);
+  REQUIRE(RTC::normalize(v) == RTC::Vector(1 / sqrt14, 2 / sqrt14, 3 / sqrt14));
+  auto norm = RTC::normalize(v);
+  REQUIRE_THAT(norm.magnitude(), Catch::Matchers::WithinAbs(1, 1e-8));
 }
