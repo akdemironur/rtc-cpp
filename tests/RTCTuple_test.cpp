@@ -25,3 +25,8 @@ TEST_CASE("Tuple, vector tests", "[Tuple]") {
   REQUIRE(a.isVector());
   REQUIRE(a == b);
 }
+TEST_CASE("Tuple, addition", "[Tuple]") {
+  RTC::Tuple a1(3, -2, 5, 1);
+  RTC::Tuple a2(-2, 3, 1, 0);
+  REQUIRE((a1 + a2) == RTC::Tuple(1, 1, 6, 1));
+}
