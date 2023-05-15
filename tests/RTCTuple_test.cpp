@@ -46,3 +46,22 @@ TEST_CASE("Tuple, negating", "[Tuple]") {
   REQUIRE((zero - v) == RTC::Vector(-1, 2, -3));
   REQUIRE(-a == RTC::Tuple(-1, 2, -3, 4));
 }
+TEST_CASE("Tuple, multiplication with scalar", "[Tuple]") {
+  RTC::Tuple a(1, -2, 3, -4);
+  REQUIRE(a * 3.5 == RTC::Tuple(3.5, -7, 10.5, -14));
+  REQUIRE(3.5 * a == RTC::Tuple(3.5, -7, 10.5, -14));
+  REQUIRE(a * 0.5 == RTC::Tuple(0.5, -1, 1.5, -2));
+  REQUIRE(0.5 * a == RTC::Tuple(0.5, -1, 1.5, -2));
+}
+TEST_CASE("Tuple, magnitude", "[Tuple]") {
+  auto v = RTC::Vector(1, 0, 0);
+  REQUIRE(v.magnitude() == 1);
+  v = RTC::Vector(0, 1, 0);
+  REQUIRE(v.magnitude() == 1);
+  v = RTC::Vector(0, 0, 1);
+  REQUIRE(v.magnitude() == 1);
+  v = RTC::Vector(1, 2, 3);
+  REQUIRE(v.magnitude() == std::sqrt(14));
+  v = RTC::Vector(-1, -2, -3);
+  REQUIRE(v.magnitude() == std::sqrt(14));
+}
