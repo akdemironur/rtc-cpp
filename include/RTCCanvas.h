@@ -4,6 +4,7 @@
 #include <string>
 #include <sstream>
 #include <fstream>
+#include <iostream>
 namespace RTC
 {
 class Canvas
@@ -36,11 +37,18 @@ class Canvas
     }
     Color getPixel(int i, int j) const
     {
-        return _pixels[j][i];
+        if (i >= 0 && j >= 0 && i < _w && j < _h)
+            return _pixels[j][i];
+
+        std::cout << "Coordinates are out of bounds!" << std::endl;
+        return Color(-1, -1, -1);
     }
     void setPixel(int i, int j, Color c)
     {
-        _pixels[j][i] = c;
+        if (i >= 0 && j >= 0 && i < _w && j < _h)
+            _pixels[j][i] = c;
+        else
+            std::cout << "Coordinates are out of bounds!" << std::endl;
     }
     std::string ppmHeader() const
     {
