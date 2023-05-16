@@ -1,6 +1,9 @@
 #pragma once
 #include "RTCColor.h"
 #include <vector>
+#include <string>
+#include <sstream>
+#include <fstream>
 namespace RTC
 {
 class Canvas
@@ -31,13 +34,38 @@ class Canvas
     {
         return _h;
     }
-    Color getPixel(int j, int i) const
+    Color getPixel(int i, int j) const
     {
         return _pixels[j][i];
     }
-    void setPixel(int j, int i, Color c)
+    void setPixel(int i, int j, Color c)
     {
         _pixels[j][i] = c;
+    }
+    std::string ppmHeader() const
+    {
+        std::ostringstream oss;
+        oss << "P3" << std::endl << _w << " " << _h << std::endl << 255 << std::endl;
+        return oss.str();
+    }
+    std::string ppmColors() const
+    {
+        std::ostringstream oss;
+        for (auto pp : _pixels)
+        {
+            for (auto p : pp)
+            {
+                oss << p << std::endl;
+            }
+        }
+        return oss.str();
+    }
+    void ppmWrite(const std::string &fileName)
+    {
+        std::ofstream fileToWrite;
+        fileToWrite.open(fileName);
+        fileToWrite << ppmHeader() << std::endl << ppmColors();
+        fileToWrite.close();
     }
 
   protected:

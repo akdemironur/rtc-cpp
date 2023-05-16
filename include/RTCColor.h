@@ -1,5 +1,6 @@
 #pragma once
 #include "RTCTuple.h"
+#include <iostream>
 
 namespace RTC
 {
@@ -33,5 +34,7 @@ class Color : public Tuple
         return e[2];
     }
 };
+
+extern std::ostream &operator<<(std::ostream &os, const Color &c);
 
 } // namespace RTC
