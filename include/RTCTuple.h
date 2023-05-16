@@ -6,11 +6,19 @@ namespace RTC
 class Tuple
 {
   public:
-    Tuple() : e{}
+    Tuple()
     {
+        e[0] = 0;
+        e[1] = 0;
+        e[2] = 0;
+        e[3] = 0;
     }
     Tuple(double x, double y, double z, double w) : e{x, y, z, w}
     {
+        e[0] = x;
+        e[1] = y;
+        e[2] = z;
+        e[3] = w;
     }
     double x() const
     {
@@ -49,7 +57,7 @@ class Tuple
         return Tuple(-e[0], -e[1], -e[2], -e[3]);
     }
 
-  private:
+  protected:
     double e[4];
 };
 
@@ -59,6 +67,7 @@ extern Tuple operator-(const Tuple &a, const Tuple &b);
 extern Tuple operator*(const Tuple &t, double a);
 extern Tuple operator/(const Tuple &t, double a);
 extern Tuple operator*(double a, const Tuple &t);
+extern Tuple operator*(const Tuple &a, const Tuple &b);
 extern Tuple Vector(double x, double y, double z);
 extern Tuple Point(double x, double y, double z);
 extern Tuple normalize(Tuple a);

@@ -32,6 +32,11 @@ Tuple operator*(const Tuple &t, double a)
     return a * t;
 }
 
+Tuple operator*(const Tuple &a, const Tuple &b)
+{
+    return Tuple(a.x() * b.x(), a.y() * b.y(), a.z() * b.z(), a.w() * b.w());
+}
+
 Tuple operator/(const Tuple &t, double a)
 {
     return (1 / a) * t;
