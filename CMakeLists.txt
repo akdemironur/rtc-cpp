@@ -41,4 +41,4 @@ target_link_libraries( RTCCanvas_test PRIVATE Catch2::Catch2WithMain RTCCanvas R
 add_test( NAME RTCCanvas_test COMMAND RTCCanvas_test )
 
 add_executable          ( RTC src/RTC.cpp )
-target_link_libraries   ( RTC RTCTuple )
+target_link_libraries   ( RTC  RTCColor RTCCanvas RTCTick )
