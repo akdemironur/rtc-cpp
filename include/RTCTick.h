@@ -4,5 +4,5 @@
 
 namespace RTC
 {
-extern std::pair<Tuple, Tuple> tick(std::pair<Tuple, Tuple> env, std::pair<Tuple, Tuple> proj);
+extern void tick(const std::pair<Tuple, Tuple> &env, std::pair<Tuple, Tuple> &proj);
 } // namespace RTC
