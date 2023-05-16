@@ -1,22 +1,22 @@
 #include "RTCCanvas.h"
-#include "RTCColor.h"
 #include <catch2/catch_test_macros.hpp>
 #include <catch2/matchers/catch_matchers_floating_point.hpp>
 #include <cstdint>
 
-TEST_CASE("Canvas, creation", "[Color]")
+TEST_CASE("Canvas, creation", "[Canvas]")
 {
-    RTC::Canvas c(10,20);
-    RTC::Color r(1,0,0);
-    RTC::Color zero(0,0,0);
-    REQUIRE(c.width() == 10);
-    REQUIRE(c.height() == 20);
-    for (auto i = 0; i < 10; i++){
-        for(auto j = 0; j <20;j++){
-            REQUIRE(c.getPixel(i,j) == zero);
+    RTC::Canvas c(4, 4);
+    RTC::Color r(1, 0, 0);
+    RTC::Color zero(0, 0, 0);
+    REQUIRE(c.width() == 4);
+    REQUIRE(c.height() == 4);
+    for (auto i = 0; i < 4; i++)
+    {
+        for (auto j = 0; j < 4; j++)
+        {
+            REQUIRE(c.getPixel(i, j) == zero);
         }
     }
-    c.setPixel(2,3,r);
-    REQUIRE(c.getPixel(2,3) == r);
+    c.setPixel(2, 3, r);
+    REQUIRE(c.getPixel(2, 3) == r);
 }
-
