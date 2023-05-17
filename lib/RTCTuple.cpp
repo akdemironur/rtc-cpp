@@ -17,6 +17,11 @@ bool operator==(const Tuple &a, const Tuple &b)
             approxEqual(a.w(), b.w()));
 }
 
+bool operator!=(const Tuple &a, const Tuple &b)
+{
+    return !(a == b);
+}
+
 Tuple operator+(const Tuple &a, const Tuple &b)
 {
     return Tuple(a.x() + b.x(), a.y() + b.y(), a.z() + b.z(), a.w() + b.w());

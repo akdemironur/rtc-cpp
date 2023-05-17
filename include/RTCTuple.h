@@ -62,6 +62,7 @@ class Tuple
 };
 
 extern bool operator==(const Tuple &a, const Tuple &b);
+extern bool operator!=(const Tuple &a, const Tuple &b);
 extern Tuple operator+(const Tuple &a, const Tuple &b);
 extern Tuple operator-(const Tuple &a, const Tuple &b);
 extern Tuple operator*(const Tuple &t, double a);
