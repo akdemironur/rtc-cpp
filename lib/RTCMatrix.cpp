@@ -99,13 +99,15 @@ Matrix::Matrix(unsigned numRows, unsigned numColumns, std::vector<double> values
     values.resize(_numRows * _numColumns);
     _values = values;
 }
-Matrix Matrix::transpose() const
+Matrix &Matrix::transpose()
 {
     std::vector<double> transposedValues;
     for (auto c = 0; c < this->numColumns(); c++)
         for (auto r = 0; r < this->numRows(); r++)
             transposedValues.push_back((*this)(r, c));
-    return Matrix(this->numColumns(), this->numRows(), transposedValues);
+    std::swap(_numRows, _numColumns);
+    _values = transposedValues;
+    return *this;
 }
 unsigned Matrix::numRows() const
 {
@@ -141,5 +143,24 @@ Matrix Matrix::submatrix(unsigned sr, unsigned sc) const
         }
     }
     return Matrix(this->numRows() - 1, this->numColumns() - 1, subValues);
+}
+
+bool Matrix::isInvertible() const
+{
+    return !approxEqual(this->determinant(), 0);
+}
+Matrix Matrix::getInverse() const
+{
+    double det = this->determinant();
+    std::vector<double> values;
+    auto inv = Matrix(this->numRows(), this->numColumns(), values);
+    for (auto r = 0; r < this->numRows(); r++)
+    {
+        for (auto c = 0; c < this->numColumns(); c++)
+        {
+            inv(c, r) = this->cofactor(r, c) / det;
+        }
+    }
+    return inv;
 }
 } // namespace RTC

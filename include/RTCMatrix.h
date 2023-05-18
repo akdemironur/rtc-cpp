@@ -12,7 +12,7 @@ class Matrix
     Matrix(unsigned numRows, unsigned numColumns, std::vector<double> values);
     double &operator()(unsigned row, unsigned col);
     double operator()(unsigned row, unsigned col) const;
-    Matrix transpose() const;
+    Matrix &transpose();
     unsigned numRows() const;
     unsigned numColumns() const;
     const std::vector<double> &values() const;
@@ -21,6 +21,8 @@ class Matrix
     double determinant() const;
     double cofactor(unsigned r, unsigned c) const;
     double minor(unsigned r, unsigned c) const;
+    bool isInvertible() const;
+    Matrix getInverse() const;
 
   protected:
     unsigned _numRows, _numColumns;

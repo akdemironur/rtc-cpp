@@ -268,3 +268,40 @@ TEST_CASE("Matrix, minor/cofactor/det test", "[Matrix]")
     REQUIRE_THAT(A.cofactor(0, 3), Catch::Matchers::WithinAbs(51, 1e-8));
     REQUIRE_THAT(A.determinant(), Catch::Matchers::WithinAbs(-4071, 1e-8));
 }
+TEST_CASE("Matrix, invertible check test", "[Matrix]")
+{
+    std::vector<double> values;
+    values.insert(values.end(), {6, 4, 4, 4, 5, 5, 7, 6, 4, -9, 3, -7, 9, 1, 7, -6});
+    RTC::Matrix A(4, 4, values);
+    REQUIRE(A.isInvertible());
+    values.clear();
+    values.insert(values.end(), {-4, 2, -2, -3, 9, 6, 2, 6, 0, -5, 1, -5, 0, 0, 0, 0});
+    A = RTC::Matrix(4, 4, values);
+    REQUIRE(!A.isInvertible());
+}
+TEST_CASE("Matrix, inversion test", "[Matrix]")
+{
+    std::vector<double> values;
+    values.insert(values.end(), {-5, 2, 6, -8, 1, -5, 1, 8, 7, 7, -6, -7, 1, -3, 7, 4});
+    auto A = RTC::Matrix(4, 4, values);
+    auto B = A.getInverse();
+
+    REQUIRE_THAT(A.determinant(), Catch::Matchers::WithinAbs(532, 1e-8));
+    REQUIRE_THAT(A.cofactor(2, 3), Catch::Matchers::WithinAbs(-160, 1e-8));
+    REQUIRE_THAT(B(3, 2), Catch::Matchers::WithinAbs(-160.0 / 532.0, 1e-8));
+    REQUIRE_THAT(A.cofactor(3, 2), Catch::Matchers::WithinAbs(105, 1e-8));
+    REQUIRE_THAT(B(2, 3), Catch::Matchers::WithinAbs(105.0 / 532.0, 1e-8));
+
+    REQUIRE(A * B == RTC::identityMatrix(4));
+
+    values.clear();
+    values.insert(values.end(), {3, -9, 7, 3, 3, -8, 2, -9, -4, 4, 4, 1, -6, 5, -1, 1});
+    A = RTC::Matrix(4, 4, values);
+
+    values.clear();
+    values.insert(values.end(), {8, 2, 2, 2, 3, -1, 7, 0, 7, 0, 5, 4, 6, -2, 0, 5});
+    B = RTC::Matrix(4, 4, values);
+    REQUIRE((A * B) * B.getInverse() == A);
+    REQUIRE(A * A.getInverse() == RTC::identityMatrix(4));
+    REQUIRE(B * B.getInverse() == RTC::identityMatrix(4));
+}
