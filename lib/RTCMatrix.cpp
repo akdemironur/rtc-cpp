@@ -1,6 +1,14 @@
 #include "RTCMatrix.h"
 namespace RTC
 {
+double &Matrix::operator()(unsigned row, unsigned col)
+{
+    return _values[_numColumns * row + col];
+}
+double Matrix::operator()(unsigned row, unsigned col) const
+{
+    return _values[_numColumns * row + col];
+}
 bool operator==(const Matrix &a, const Matrix &b)
 {
     if (!(a.numColumns() == b.numColumns() && a.numRows() == b.numRows()))
@@ -82,5 +90,56 @@ double Matrix::minor(unsigned r, unsigned c) const
 {
     auto sub = this->submatrix(r, c);
     return sub.determinant();
+}
+
+Matrix::Matrix(unsigned numRows, unsigned numColumns, std::vector<double> values)
+{
+    _numRows = numRows;
+    _numColumns = numColumns;
+    values.resize(_numRows * _numColumns);
+    _values = values;
+}
+Matrix Matrix::transpose() const
+{
+    std::vector<double> transposedValues;
+    for (auto c = 0; c < this->numColumns(); c++)
+        for (auto r = 0; r < this->numRows(); r++)
+            transposedValues.push_back((*this)(r, c));
+    return Matrix(this->numColumns(), this->numRows(), transposedValues);
+}
+unsigned Matrix::numRows() const
+{
+    return _numRows;
+}
+unsigned Matrix::numColumns() const
+{
+    return _numColumns;
+}
+const std::vector<double> &Matrix::values() const
+{
+    return _values;
+}
+void Matrix::print() const
+{
+    std::cout << "=====================\n";
+    std::cout << "Rows: " << _numRows << "\tCols: " << _numColumns << std::endl;
+    for (auto i : this->values())
+    {
+        std::cout << i << std::endl;
+    }
+    std::cout << "=====================\n";
+}
+Matrix Matrix::submatrix(unsigned sr, unsigned sc) const
+{
+    std::vector<double> subValues;
+    for (auto r = 0; r < this->numRows(); r++)
+    {
+        for (auto c = 0; c < this->numColumns(); c++)
+        {
+            if (!(c == sc || r == sr))
+                subValues.push_back((*this)(r, c));
+        }
+    }
+    return Matrix(this->numRows() - 1, this->numColumns() - 1, subValues);
 }
 } // namespace RTC

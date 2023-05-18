@@ -9,66 +9,15 @@ namespace RTC
 class Matrix
 {
   public:
-    Matrix(unsigned numRows, unsigned numColumns, std::vector<double> values)
-    {
-        _numRows = numRows;
-        _numColumns = numColumns;
-        values.resize(_numRows * _numColumns);
-        _values = values;
-    }
-    double &operator()(unsigned row, unsigned col)
-    {
-        return _values[_numColumns * row + col];
-    }
-    double operator()(unsigned row, unsigned col) const
-    {
-        return _values[_numColumns * row + col];
-    }
-    Matrix &transpose()
-    {
-        std::vector<double> transposedValues;
-        for (auto c = 0; c < _numColumns; c++)
-            for (auto r = 0; r < _numRows; r++)
-                transposedValues.push_back((*this)(r, c));
-        std::swap(_numRows, _numColumns);
-        _values = transposedValues;
-        return *this;
-    }
-    unsigned numRows() const
-    {
-        return _numRows;
-    }
-    unsigned numColumns() const
-    {
-        return _numColumns;
-    }
-    const std::vector<double> &values() const
-    {
-        return _values;
-    }
-    void print() const
-    {
-        std::cout << "=====================\n";
-        std::cout << "Rows: " << _numRows << "\tCols: " << _numColumns << std::endl;
-        for (auto i : _values)
-        {
-            std::cout << i << std::endl;
-        }
-        std::cout << "=====================\n";
-    }
-    Matrix submatrix(unsigned sr, unsigned sc) const
-    {
-        std::vector<double> subValues;
-        for (auto r = 0; r < _numRows; r++)
-        {
-            for (auto c = 0; c < _numColumns; c++)
-            {
-                if (!(c == sc || r == sr))
-                    subValues.push_back((*this)(r, c));
-            }
-        }
-        return Matrix(_numRows - 1, _numColumns - 1, subValues);
-    }
+    Matrix(unsigned numRows, unsigned numColumns, std::vector<double> values);
+    double &operator()(unsigned row, unsigned col);
+    double operator()(unsigned row, unsigned col) const;
+    Matrix transpose() const;
+    unsigned numRows() const;
+    unsigned numColumns() const;
+    const std::vector<double> &values() const;
+    void print() const;
+    Matrix submatrix(unsigned sr, unsigned sc) const;
     double determinant() const;
     double cofactor(unsigned r, unsigned c) const;
     double minor(unsigned r, unsigned c) const;
