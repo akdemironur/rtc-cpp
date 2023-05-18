@@ -1,4 +1,5 @@
 #include "RTCMatrix.h"
+#include <vector>
 namespace RTC
 {
 bool operator==(const Matrix &a, const Matrix &b)
@@ -17,5 +18,24 @@ bool operator==(const Matrix &a, const Matrix &b)
 bool operator!=(const Matrix &a, const Matrix &b)
 {
     return !(a == b);
+}
+Matrix operator*(const Matrix &a, const Matrix &b)
+{
+    unsigned resultRows = a.numRows();
+    unsigned resultColumns = b.numColumns();
+    std::vector<double> resultValues(resultRows * resultColumns);
+    Matrix result(resultRows, resultColumns, resultValues);
+    for (auto row = 0; row < resultRows; row++)
+    {
+        for (auto col = 0; col < resultColumns; col++)
+        {
+            result(row, col) = 0;
+            for (auto i = 0; i < a.numColumns(); i++)
+            {
+                result(row, col) += a(row, i) * b(i, col);
+            }
+        }
+    }
+    return result;
 }
 } // namespace RTC

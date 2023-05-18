@@ -41,4 +41,5 @@ class Matrix
 };
 extern bool operator==(const Matrix &a, const Matrix &b);
 extern bool operator!=(const Matrix &a, const Matrix &b);
+extern Matrix operator*(const Matrix &a, const Matrix &b);
 } // namespace RTC
