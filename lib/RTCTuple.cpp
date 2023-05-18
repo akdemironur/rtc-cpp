@@ -1,6 +1,65 @@
 #include "RTCTuple.h"
 namespace RTC
 {
+Tuple::Tuple()
+{
+    e.push_back(0);
+    e.push_back(0);
+    e.push_back(0);
+    e.push_back(0);
+}
+Tuple::Tuple(double x, double y, double z, double w)
+{
+    e.push_back(x);
+    e.push_back(y);
+    e.push_back(z);
+    e.push_back(w);
+}
+double Tuple::x() const
+{
+    return e[0];
+}
+double Tuple::y() const
+{
+    return e[1];
+}
+double Tuple::z() const
+{
+    return e[2];
+}
+double Tuple::w() const
+{
+    return e[3];
+}
+const std::vector<double> &Tuple::vec() const
+{
+    return e;
+}
+double Tuple::magsqr() const
+{
+    return (std::pow(e[0], 2) + std::pow(e[1], 2) + std::pow(e[2], 2) + std::pow(e[3], 2));
+}
+double Tuple::magnitude() const
+{
+    return std::sqrt(magsqr());
+}
+bool Tuple::isPoint() const
+{
+    return approxEqual(e[3], 1.0);
+}
+bool Tuple::isVector() const
+{
+    return approxEqual(e[3], 0.0);
+}
+Tuple Tuple::getNorm() const
+{
+    auto mag = magnitude();
+    return Tuple(x() / mag, y() / mag, z() / mag, w() / mag);
+}
+Tuple Tuple::operator-() const
+{
+    return Tuple(-e[0], -e[1], -e[2], -e[3]);
+}
 Tuple Vector(double x, double y, double z)
 {
     return Tuple(x, y, z, 0.0);

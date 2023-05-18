@@ -6,65 +6,19 @@ namespace RTC
 class Tuple
 {
   public:
-    Tuple()
-    {
-        e.push_back(0);
-        e.push_back(0);
-        e.push_back(0);
-        e.push_back(0);
-    }
-    Tuple(double x, double y, double z, double w)
-    {
-        e.push_back(x);
-        e.push_back(y);
-        e.push_back(z);
-        e.push_back(w);
-    }
-    double x() const
-    {
-        return e[0];
-    }
-    double y() const
-    {
-        return e[1];
-    }
-    double z() const
-    {
-        return e[2];
-    }
-    double w() const
-    {
-        return e[3];
-    }
-    const std::vector<double> &vec() const
-    {
-        return e;
-    }
-    double magsqr() const
-    {
-        return (std::pow(e[0], 2) + std::pow(e[1], 2) + std::pow(e[2], 2) + std::pow(e[3], 2));
-    }
-    double magnitude() const
-    {
-        return std::sqrt(magsqr());
-    }
-    bool isPoint() const
-    {
-        return approxEqual(e[3], 1.0);
-    }
-    bool isVector() const
-    {
-        return approxEqual(e[3], 0.0);
-    }
-    Tuple getNorm() const
-    {
-        auto mag = magnitude();
-        return Tuple(x() / mag, y() / mag, z() / mag, w() / mag);
-    }
-    Tuple operator-() const
-    {
-        return Tuple(-e[0], -e[1], -e[2], -e[3]);
-    }
+    Tuple();
+    Tuple(double x, double y, double z, double w);
+    double x() const;
+    double y() const;
+    double z() const;
+    double w() const;
+    const std::vector<double> &vec() const;
+    double magsqr() const;
+    double magnitude() const;
+    bool isPoint() const;
+    bool isVector() const;
+    Tuple getNorm() const;
+    Tuple operator-() const;
 
   protected:
     std::vector<double> e;
