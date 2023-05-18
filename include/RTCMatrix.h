@@ -56,6 +56,22 @@ class Matrix
         }
         std::cout << "=====================\n";
     }
+    Matrix submatrix(unsigned sr, unsigned sc) const
+    {
+        std::vector<double> subValues;
+        for (auto r = 0; r < _numRows; r++)
+        {
+            for (auto c = 0; c < _numColumns; c++)
+            {
+                if (!(c == sc || r == sr))
+                    subValues.push_back((*this)(r, c));
+            }
+        }
+        return Matrix(_numRows - 1, _numColumns - 1, subValues);
+    }
+    double determinant() const;
+    double cofactor(unsigned r, unsigned c) const;
+    double minor(unsigned r, unsigned c) const;
 
   protected:
     unsigned _numRows, _numColumns;

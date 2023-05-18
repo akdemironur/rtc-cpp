@@ -152,6 +152,7 @@ TEST_CASE("Matrix, multiplication with tuple tests", "[Matrix]")
     RTC::Matrix A(4, 4, values);
     RTC::Tuple b(1, 2, 3, 1);
     REQUIRE((A * b) == RTC::columnVector(RTC::Tuple(18, 24, 33, 1)));
+    REQUIRE(A * RTC::identityMatrix(4) == A);
 }
 TEST_CASE("Matrix, tranpose test", "[Matrix]")
 {
@@ -192,4 +193,78 @@ TEST_CASE("Matrix, tranpose test", "[Matrix]")
     values.push_back(8);
     RTC::Matrix A_transposed(4, 4, values);
     REQUIRE(A.transpose() == A_transposed);
+    auto id4 = RTC::identityMatrix(4);
+    auto id42 = id4;
+    REQUIRE(id4.transpose() == id42);
+}
+TEST_CASE("Matrix, determinant test", "[Matrix]")
+{
+    std::vector<double> values;
+    values.push_back(1);
+    values.push_back(5);
+    values.push_back(-3);
+    values.push_back(2);
+    RTC::Matrix A(2, 2, values);
+    REQUIRE_THAT(A.determinant(), Catch::Matchers::WithinAbs(17, 1e-8));
+}
+TEST_CASE("Matrix, submatrix test", "[Matrix]")
+{
+
+    std::vector<double> values;
+    values.push_back(1);
+    values.push_back(5);
+    values.push_back(0);
+    values.push_back(-3);
+    values.push_back(2);
+    values.push_back(7);
+    values.push_back(0);
+    values.push_back(6);
+    values.push_back(-3);
+    RTC::Matrix A(3, 3, values);
+    values.clear();
+    values.push_back(-3);
+    values.push_back(2);
+    values.push_back(0);
+    values.push_back(6);
+    RTC::Matrix A_sub(2, 2, values);
+    REQUIRE(A.submatrix(0, 2) == A_sub);
+
+    values.clear();
+    values.insert(values.end(), {-6, 1, 1, 6, -8, 5, 8, 6, -1, 0, 8, 2, -7, 1, -1, 1});
+    RTC::Matrix B(4, 4, values);
+    values.clear();
+    values.insert(values.end(), {-6, 1, 6, -8, 8, 6, -7, -1, 1});
+    RTC::Matrix B_sub(3, 3, values);
+    REQUIRE(B.submatrix(2, 1) == B_sub);
+}
+TEST_CASE("Matrix, minor/cofactor test", "[Matrix]")
+{
+    std::vector<double> values;
+    values.insert(values.end(), {3, 5, 0, 2, -1, -7, 6, -1, 5});
+    RTC::Matrix A(3, 3, values);
+    auto B = A.submatrix(1, 0);
+    REQUIRE_THAT(B.determinant(), Catch::Matchers::WithinAbs(25, 1e-8));
+    REQUIRE_THAT(A.minor(1, 0), Catch::Matchers::WithinAbs(25, 1e-8));
+    REQUIRE_THAT(A.cofactor(1, 0), Catch::Matchers::WithinAbs(-25, 1e-8));
+    REQUIRE_THAT(A.minor(0, 0), Catch::Matchers::WithinAbs(-12, 1e-8));
+    REQUIRE_THAT(A.cofactor(0, 0), Catch::Matchers::WithinAbs(-12, 1e-8));
+}
+
+TEST_CASE("Matrix, minor/cofactor/det test", "[Matrix]")
+{
+    std::vector<double> values;
+    values.insert(values.end(), {1, 2, 6, -5, 8, -4, 2, 6, 4});
+    RTC::Matrix A(3, 3, values);
+    REQUIRE_THAT(A.cofactor(0, 0), Catch::Matchers::WithinAbs(56, 1e-8));
+    REQUIRE_THAT(A.cofactor(0, 1), Catch::Matchers::WithinAbs(12, 1e-8));
+    REQUIRE_THAT(A.cofactor(0, 2), Catch::Matchers::WithinAbs(-46, 1e-8));
+    REQUIRE_THAT(A.determinant(), Catch::Matchers::WithinAbs(-196, 1e-8));
+    values.clear();
+    values.insert(values.end(), {-2, -8, 3, 5, -3, 1, 7, 3, 1, 2, -9, 6, -6, 7, 7, -9});
+    A = RTC::Matrix(4, 4, values);
+    REQUIRE_THAT(A.cofactor(0, 0), Catch::Matchers::WithinAbs(690, 1e-8));
+    REQUIRE_THAT(A.cofactor(0, 1), Catch::Matchers::WithinAbs(447, 1e-8));
+    REQUIRE_THAT(A.cofactor(0, 2), Catch::Matchers::WithinAbs(210, 1e-8));
+    REQUIRE_THAT(A.cofactor(0, 3), Catch::Matchers::WithinAbs(51, 1e-8));
+    REQUIRE_THAT(A.determinant(), Catch::Matchers::WithinAbs(-4071, 1e-8));
 }

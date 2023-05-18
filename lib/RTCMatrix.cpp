@@ -59,4 +59,28 @@ Matrix operator*(const Matrix &A, const Tuple &b)
     auto bMat = columnVector(b);
     return A * bMat;
 }
+double Matrix::determinant() const
+{
+    if (this->numRows() == 1 && this->numColumns() == 1)
+        return (*this)(0, 0);
+    double det = 0;
+    for (auto c = 0; c < this->numColumns(); c++)
+    {
+        det += this->cofactor(0, c) * (*this)(0, c);
+    }
+    return det;
+}
+double Matrix::cofactor(unsigned r, unsigned c) const
+{
+    auto minor = this->minor(r, c);
+    if ((r + c) % 2 == 0)
+        return minor;
+    else
+        return -minor;
+}
+double Matrix::minor(unsigned r, unsigned c) const
+{
+    auto sub = this->submatrix(r, c);
+    return sub.determinant();
+}
 } // namespace RTC
