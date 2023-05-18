@@ -4,6 +4,32 @@
 namespace RTC
 {
 
+Color::Color()
+{
+    e[0] = 0;
+    e[1] = 0;
+    e[2] = 0;
+    e[3] = 0;
+}
+Color::Color(double x, double y, double z)
+{
+    e[0] = x;
+    e[1] = y;
+    e[2] = z;
+    e[3] = 0;
+}
+double Color::red() const
+{
+    return e[0];
+}
+double Color::green() const
+{
+    return e[1];
+}
+double Color::blue() const
+{
+    return e[2];
+}
 int normColorComponent(double x)
 {
     return std::max(std::min(int(std::lrint(255 * x)), 255), 0);
