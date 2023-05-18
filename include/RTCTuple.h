@@ -1,6 +1,5 @@
 #pragma once
 #include "RTCCommon.h"
-#include "RTCMatrix.h"
 #include <vector>
 namespace RTC
 {
@@ -37,6 +36,10 @@ class Tuple
     {
         return e[3];
     }
+    const std::vector<double> &vec() const
+    {
+        return e;
+    }
     double magsqr() const
     {
         return (std::pow(e[0], 2) + std::pow(e[1], 2) + std::pow(e[2], 2) + std::pow(e[3], 2));
@@ -61,14 +64,6 @@ class Tuple
     Tuple operator-() const
     {
         return Tuple(-e[0], -e[1], -e[2], -e[3]);
-    }
-    Matrix rowVector() const
-    {
-        return Matrix(1, 4, e);
-    }
-    Matrix columnVector() const
-    {
-        return Matrix(4, 1, e);
     }
 
   protected:

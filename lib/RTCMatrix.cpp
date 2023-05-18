@@ -1,5 +1,4 @@
 #include "RTCMatrix.h"
-#include <vector>
 namespace RTC
 {
 bool operator==(const Matrix &a, const Matrix &b)
@@ -37,5 +36,27 @@ Matrix operator*(const Matrix &a, const Matrix &b)
         }
     }
     return result;
+}
+Matrix rowVector(const Tuple &a)
+{
+    return Matrix(1, 4, a.vec());
+}
+Matrix columnVector(const Tuple &a)
+{
+    return Matrix(4, 1, a.vec());
+}
+Matrix identityMatrix(unsigned size)
+{
+    std::vector<double> values(size * size);
+    Matrix id(size, size, values);
+    for (auto i = 0; i < size; i++)
+        id(i, i) = 1;
+    return id;
+}
+
+Matrix operator*(const Matrix &A, const Tuple &b)
+{
+    auto bMat = columnVector(b);
+    return A * bMat;
 }
 } // namespace RTC

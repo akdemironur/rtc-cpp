@@ -83,3 +83,113 @@ TEST_CASE("Matrix, creation tests", "[Matrix]")
     REQUIRE(A == B);
     REQUIRE(A != M);
 }
+TEST_CASE("Matrix, multiplication tests", "[Matrix]")
+{
+    std::vector<double> values;
+    for (auto i = 1; i <= 9; i++)
+        values.push_back(i);
+    for (auto i = 8; i >= 2; i--)
+        values.push_back(i);
+    RTC::Matrix A(4, 4, values);
+    values.clear();
+    values.push_back(-2);
+    values.push_back(1);
+    values.push_back(2);
+    values.push_back(3);
+    values.push_back(3);
+    values.push_back(2);
+    values.push_back(1);
+    values.push_back(-1);
+    values.push_back(4);
+    values.push_back(3);
+    values.push_back(6);
+    values.push_back(5);
+    values.push_back(1);
+    values.push_back(2);
+    values.push_back(7);
+    values.push_back(8);
+    RTC::Matrix B(4, 4, values);
+
+    values.clear();
+    values.push_back(20);
+    values.push_back(22);
+    values.push_back(50);
+    values.push_back(48);
+    values.push_back(44);
+    values.push_back(54);
+    values.push_back(114);
+    values.push_back(108);
+    values.push_back(40);
+    values.push_back(58);
+    values.push_back(110);
+    values.push_back(102);
+    values.push_back(16);
+    values.push_back(26);
+    values.push_back(46);
+    values.push_back(42);
+    RTC::Matrix C(4, 4, values);
+    REQUIRE(A * B == C);
+}
+TEST_CASE("Matrix, multiplication with tuple tests", "[Matrix]")
+{
+    std::vector<double> values;
+    values.push_back(1);
+    values.push_back(2);
+    values.push_back(3);
+    values.push_back(4);
+    values.push_back(2);
+    values.push_back(4);
+    values.push_back(4);
+    values.push_back(2);
+    values.push_back(8);
+    values.push_back(6);
+    values.push_back(4);
+    values.push_back(1);
+    values.push_back(0);
+    values.push_back(0);
+    values.push_back(0);
+    values.push_back(1);
+    RTC::Matrix A(4, 4, values);
+    RTC::Tuple b(1, 2, 3, 1);
+    REQUIRE((A * b) == RTC::columnVector(RTC::Tuple(18, 24, 33, 1)));
+}
+TEST_CASE("Matrix, tranpose test", "[Matrix]")
+{
+    std::vector<double> values;
+    values.push_back(0);
+    values.push_back(9);
+    values.push_back(3);
+    values.push_back(0);
+    values.push_back(9);
+    values.push_back(8);
+    values.push_back(0);
+    values.push_back(8);
+    values.push_back(1);
+    values.push_back(8);
+    values.push_back(5);
+    values.push_back(3);
+    values.push_back(0);
+    values.push_back(0);
+    values.push_back(5);
+    values.push_back(8);
+    RTC::Matrix A(4, 4, values);
+    values.clear();
+    values.push_back(0);
+    values.push_back(9);
+    values.push_back(1);
+    values.push_back(0);
+    values.push_back(9);
+    values.push_back(8);
+    values.push_back(8);
+    values.push_back(0);
+    values.push_back(3);
+    values.push_back(0);
+    values.push_back(5);
+    values.push_back(5);
+    values.push_back(0);
+    values.push_back(8);
+    values.push_back(3);
+    values.push_back(8);
+    RTC::Matrix A_transposed(4, 4, values);
+    REQUIRE(A.transpose() == A_transposed);
+}
