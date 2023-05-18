@@ -1,6 +1,7 @@
 #pragma once
 #include "RTCCommon.h"
-
+#include "RTCMatrix.h"
+#include <vector>
 namespace RTC
 {
 class Tuple
@@ -8,17 +9,17 @@ class Tuple
   public:
     Tuple()
     {
-        e[0] = 0;
-        e[1] = 0;
-        e[2] = 0;
-        e[3] = 0;
+        e.push_back(0);
+        e.push_back(0);
+        e.push_back(0);
+        e.push_back(0);
     }
-    Tuple(double x, double y, double z, double w) : e{x, y, z, w}
+    Tuple(double x, double y, double z, double w)
     {
-        e[0] = x;
-        e[1] = y;
-        e[2] = z;
-        e[3] = w;
+        e.push_back(x);
+        e.push_back(y);
+        e.push_back(z);
+        e.push_back(w);
     }
     double x() const
     {
@@ -44,21 +45,34 @@ class Tuple
     {
         return std::sqrt(magsqr());
     }
-    bool isPoint()
+    bool isPoint() const
     {
         return approxEqual(e[3], 1.0);
     }
-    bool isVector()
+    bool isVector() const
     {
         return approxEqual(e[3], 0.0);
+    }
+    Tuple getNorm() const
+    {
+        auto mag = magnitude();
+        return Tuple(x() / mag, y() / mag, z() / mag, w() / mag);
     }
     Tuple operator-() const
     {
         return Tuple(-e[0], -e[1], -e[2], -e[3]);
     }
+    Matrix rowVector() const
+    {
+        return Matrix(1, 4, e);
+    }
+    Matrix columnVector() const
+    {
+        return Matrix(4, 1, e);
+    }
 
   protected:
-    double e[4];
+    std::vector<double> e;
 };
 
 extern bool operator==(const Tuple &a, const Tuple &b);
@@ -71,7 +85,6 @@ extern Tuple operator*(double a, const Tuple &t);
 extern Tuple operator*(const Tuple &a, const Tuple &b);
 extern Tuple Vector(double x, double y, double z);
 extern Tuple Point(double x, double y, double z);
-extern Tuple normalize(Tuple a);
 extern double dot(const Tuple &a, const Tuple &b);
 extern Tuple cross(const Tuple &a, const Tuple &b);
 } // namespace RTC

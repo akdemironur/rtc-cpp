@@ -8,7 +8,7 @@
 int main()
 {
     auto startPoint = RTC::Point(0, 1, 0);
-    auto initialVelocity = RTC::normalize(RTC::Vector(1, 1.8, 0)) * 11.25;
+    auto initialVelocity = (RTC::Vector(1, 1.8, 0).getNorm()) * 11.25;
     std::pair<RTC::Tuple, RTC::Tuple> proj{startPoint, initialVelocity};
     auto gravity = RTC::Vector(0, -0.1, 0);
     auto wind = RTC::Vector(-0.01, 0, 0);
