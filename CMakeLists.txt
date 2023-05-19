@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.1)
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 20)
 
 # Edit project name
 project(rtc-cpp VERSION 0.1)
@@ -53,4 +53,4 @@ target_link_libraries( RTCMatrix_test PRIVATE Catch2::Catch2WithMain RTCMatrix )
 add_test( NAME RTCMatrix_test COMMAND RTCMatrix_test )
 
 add_executable          ( RTC src/RTC.cpp )
-target_link_libraries   ( RTC  RTCColor RTCCanvas RTCTick )
+target_link_libraries   ( RTC  RTCColor RTCCanvas RTCTick RTCTransformations )
