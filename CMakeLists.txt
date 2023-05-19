@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.1)
 set(CMAKE_CXX_STANDARD 20)
-
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 # Edit project name
 project(rtc-cpp VERSION 0.1)
 
@@ -31,6 +31,10 @@ add_library             ( RTCCanvas lib/RTCCanvas.cpp )
 target_link_libraries   ( RTCCanvas RTCColor )
 add_library             ( RTCTransformations lib/RTCTransformations.cpp )
 target_link_libraries   ( RTCTransformations RTCMatrix )
+add_library             ( RTCRay lib/RTCRay.cpp )
+target_link_libraries   ( RTCRay RTCTuple )
+add_library             ( RTCShape lib/RTCShape.cpp )
+target_link_libraries   ( RTCShape RTCTuple RTCRay )
 
 add_executable( RTCTuple_test tests/RTCTuple_test.cpp )
 target_link_libraries( RTCTuple_test PRIVATE Catch2::Catch2WithMain RTCTuple )
@@ -43,6 +47,10 @@ add_test( NAME RTCTransformations_test COMMAND RTCTransformations_test )
 add_executable( RTCColor_test tests/RTCColor_test.cpp )
 target_link_libraries( RTCColor_test PRIVATE Catch2::Catch2WithMain RTCColor)
 add_test( NAME RTCColor_test COMMAND RTCColor_test )
+
+add_executable( RTCRay_test tests/RTCRay_test.cpp )
+target_link_libraries( RTCRay_test PRIVATE Catch2::Catch2WithMain RTCRay RTCShape )
+add_test( NAME RTCRay_test COMMAND RTCRay_test )
 
 add_executable( RTCCanvas_test tests/RTCCanvas_test.cpp )
 target_link_libraries( RTCCanvas_test PRIVATE Catch2::Catch2WithMain RTCCanvas RTCColor)
