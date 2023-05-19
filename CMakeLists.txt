@@ -29,10 +29,16 @@ add_library             ( RTCColor lib/RTCColor.cpp )
 target_link_libraries   ( RTCColor RTCTuple )
 add_library             ( RTCCanvas lib/RTCCanvas.cpp )
 target_link_libraries   ( RTCCanvas RTCColor )
+add_library             ( RTCTransformations lib/RTCTransformations.cpp )
+target_link_libraries   ( RTCTransformations RTCMatrix )
 
 add_executable( RTCTuple_test tests/RTCTuple_test.cpp )
 target_link_libraries( RTCTuple_test PRIVATE Catch2::Catch2WithMain RTCTuple )
 add_test( NAME RTCTuple_test COMMAND RTCTuple_test )
+
+add_executable( RTCTransformations_test tests/RTCTransformations_test.cpp )
+target_link_libraries( RTCTransformations_test PRIVATE Catch2::Catch2WithMain RTCTransformations )
+add_test( NAME RTCTransformations_test COMMAND RTCTransformations_test )
 
 add_executable( RTCColor_test tests/RTCColor_test.cpp )
 target_link_libraries( RTCColor_test PRIVATE Catch2::Catch2WithMain RTCColor)
