@@ -15,6 +15,10 @@ Tuple::Tuple(double x, double y, double z, double w)
     e.push_back(z);
     e.push_back(w);
 }
+Tuple::Tuple(std::vector<double> vals)
+{
+    e = vals;
+}
 double Tuple::x() const
 {
     return e[0];

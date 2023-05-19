@@ -8,6 +8,7 @@ class Tuple
   public:
     Tuple();
     Tuple(double x, double y, double z, double w);
+    Tuple(std::vector<double> vals);
     double x() const;
     double y() const;
     double z() const;

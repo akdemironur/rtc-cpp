@@ -151,7 +151,7 @@ TEST_CASE("Matrix, multiplication with tuple tests", "[Matrix]")
     values.push_back(1);
     RTC::Matrix A(4, 4, values);
     RTC::Tuple b(1, 2, 3, 1);
-    REQUIRE((A * b) == RTC::columnVector(RTC::Tuple(18, 24, 33, 1)));
+    REQUIRE((A * b) == (RTC::Tuple(18, 24, 33, 1)));
     REQUIRE(A * RTC::identityMatrix(4) == A);
 }
 TEST_CASE("Matrix, tranpose test", "[Matrix]")

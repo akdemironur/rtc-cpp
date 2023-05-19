@@ -62,11 +62,21 @@ Matrix identityMatrix(unsigned size)
     return id;
 }
 
-Matrix operator*(const Matrix &A, const Tuple &b)
+Tuple operator*(const Matrix &A, const Tuple &b)
 {
     auto bMat = columnVector(b);
-    return A * bMat;
+    auto C = A * bMat;
+    return C.toTuple();
 }
+std::vector<double> Matrix::vec() const
+{
+    return _values;
+}
+Tuple Matrix::toTuple() const
+{
+    return Tuple(this->vec());
+}
+
 double Matrix::determinant() const
 {
     if (this->numRows() == 1 && this->numColumns() == 1)

@@ -23,6 +23,8 @@ class Matrix
     double minor(unsigned r, unsigned c) const;
     bool isInvertible() const;
     Matrix getInverse() const;
+    Tuple toTuple() const;
+    std::vector<double> vec() const;
 
   protected:
     unsigned _numRows, _numColumns;
@@ -31,7 +33,7 @@ class Matrix
 extern bool operator==(const Matrix &a, const Matrix &b);
 extern bool operator!=(const Matrix &a, const Matrix &b);
 extern Matrix operator*(const Matrix &a, const Matrix &b);
-extern Matrix operator*(const Matrix &A, const Tuple &b);
+extern Tuple operator*(const Matrix &A, const Tuple &b);
 extern Matrix identityMatrix(unsigned size);
 Matrix rowVector(const Tuple &a);
 Matrix columnVector(const Tuple &a);
