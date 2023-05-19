@@ -56,11 +56,11 @@ Matrix shearing(double xy, double xz, double yx, double yz, double zx, double zy
     A(2, 1) = zy;
     return A;
 }
-Tuple operator>(const Tuple &b, const Matrix &A)
+Tuple operator>>=(const Tuple &b, const Matrix &A)
 {
     return A * b;
 }
-Matrix operator>(const Matrix &B, const Matrix &A)
+Matrix operator>>=(const Matrix &B, const Matrix &A)
 {
     return A * B;
 }

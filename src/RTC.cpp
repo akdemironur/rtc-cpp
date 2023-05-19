@@ -38,7 +38,7 @@ int main()
     auto p = RTC::Point(20, 0, 0);
     for (auto i = 0; i < 12; i++)
     {
-        auto p_insert = p > RTC::translation(25, 25, 0);
+        auto p_insert = p >>= RTC::translation(25, 25, 0);
         canvas.setPixel(p_insert.x(), p_insert.y(), pink);
         p = RTC::rotation_z(std::numbers::pi / 6) * p;
     }

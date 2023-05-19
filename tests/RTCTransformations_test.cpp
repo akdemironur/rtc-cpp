@@ -70,7 +70,7 @@ TEST_CASE("Transformations, chaining tests", "[Transformations]")
     auto A = RTC::rotation_x(pi / 2);
     auto B = RTC::scaling(5, 5, 5);
     auto C = RTC::translation(10, 5, 7);
-    REQUIRE((A > B > C) == (C * (B * A)));
+    REQUIRE((A >>= B >>= C) == (C * (B * A)));
     auto p = RTC::Point(5, 6, 3);
-    REQUIRE((p > A > B > C) == (C * (B * (A * p))));
+    REQUIRE((p >>= A >>= B >>= C) == (C * (B * (A * p))));
 }
