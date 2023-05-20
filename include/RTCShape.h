@@ -13,6 +13,8 @@ class Shape
     std::optional<std::pair<double, Shape &>> hit();
     const Matrix &transformation() const;
     void setTransform(Matrix M);
+    void addTransform(Matrix M);
+    virtual void restoreTransform() = 0;
 
   protected:
     std::vector<double> _intersections;
@@ -27,6 +29,7 @@ class Sphere : public Shape
     Tuple center() const;
     double radius() const;
     std::pair<std::vector<double>, const Shape &> intersect(const Ray &r);
+    void restoreTransform();
 
   protected:
     Tuple _center;

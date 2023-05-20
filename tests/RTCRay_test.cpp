@@ -119,3 +119,19 @@ TEST_CASE("Sphere, transform ray", "[Matrix]")
     auto xs = s.intersect(r);
     REQUIRE(xs.first.size() == 0);
 }
+TEST_CASE("Sphere, transform ray - 2", "[Matrix]")
+{
+    auto s = RTC::Sphere(RTC::Point(5, 0, 0), 1);
+    auto r = RTC::Ray(RTC::Point(0, 0, -5), RTC::Vector(0, 0, 1));
+    auto xs = s.intersect(r);
+    REQUIRE(xs.first.size() == 0);
+}
+TEST_CASE("Sphere, ray transform 3", "[Matrix]")
+{
+    auto r = RTC::Ray(RTC::Point(0, 0, -5), RTC::Vector(0, 0, 1));
+    auto s = RTC::Sphere(RTC::Point(0, 0, 0), 2);
+    auto xs = s.intersect(r);
+    REQUIRE(xs.first.size() == 2);
+    REQUIRE_THAT(xs.first[0], Catch::Matchers::WithinAbs(3, 1e-8));
+    REQUIRE_THAT(xs.first[1], Catch::Matchers::WithinAbs(7, 1e-8));
+}

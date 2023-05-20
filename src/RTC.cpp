@@ -3,6 +3,8 @@
 #include "RTCColor.h"
 #include "RTCTransformations.h"
 #include "RTCTick.h"
+#include "RTCRay.h"
+#include "RTCShape.h"
 #include <utility>
 #include <numbers>
 #include <iostream>
@@ -43,5 +45,25 @@ int main()
         p = RTC::rotation_z(std::numbers::pi / 6) * p;
     }
     canvas.ppmWrite("clock.ppm");
+
+    // challenge 3 Pink Sphere
+    unsigned rows = 400, cols = 400;
+    canvas = RTC::Canvas(rows, cols);
+    auto s = RTC::Sphere(RTC::Point(rows / 2.0, cols / 2.0, 0), rows * 0.4);
+    auto ray_origin = RTC::Point(rows / 2.0, cols / 2.0, -900);
+    for (auto i = 0; i < rows; i++)
+    {
+        for (auto j = 0; j < cols; j++)
+        {
+            auto r = RTC::Ray(ray_origin, (RTC::Point(i, j, rows * 0.25) - ray_origin));
+            s.intersect(r);
+            if (s.hit() != std::nullopt)
+            {
+                canvas.setPixel(i, j, pink);
+            }
+        }
+    }
+    canvas.ppmWrite("sphere.ppm");
+
     return 0;
 }

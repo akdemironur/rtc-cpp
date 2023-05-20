@@ -61,4 +61,4 @@ target_link_libraries( RTCMatrix_test PRIVATE Catch2::Catch2WithMain RTCMatrix )
 add_test( NAME RTCMatrix_test COMMAND RTCMatrix_test )
 
 add_executable          ( RTC src/RTC.cpp )
-target_link_libraries   ( RTC  RTCColor RTCCanvas RTCTick RTCTransformations )
+target_link_libraries   ( RTC  RTCColor RTCCanvas RTCTick RTCTransformations RTCRay RTCShape )

@@ -1,4 +1,6 @@
 #include "RTCShape.h"
+#include "RTCMatrix.h"
+#include "RTCTransformations.h"
 namespace RTC
 {
 Sphere::Sphere()
@@ -10,6 +12,7 @@ Sphere::Sphere(Tuple center, double radius)
 {
     _center = center;
     _radius = radius;
+    restoreTransform();
 }
 std::optional<std::pair<double, Shape &>> Shape::hit()
 {
@@ -19,12 +22,13 @@ std::optional<std::pair<double, Shape &>> Shape::hit()
     }
     auto i = std::ranges::min_element(_intersections.begin(), _intersections.end());
     std::pair<double, Shape &> j = {*i, *this};
+    _intersections.clear();
     return j;
 }
 std::pair<std::vector<double>, const Shape &> Sphere::intersect(const Ray &r_orig)
 {
     auto r = r_orig.transform(this->transformation().getInverse());
-    auto sphereToRayVec = r.origin() - center();
+    auto sphereToRayVec = r.origin() - Point(0, 0, 0);
     auto a = r.direction().magsqr();
     auto b = 2 * dot(r.direction(), sphereToRayVec);
     auto c = sphereToRayVec.magsqr() - 1;
@@ -58,5 +62,14 @@ const Matrix &Shape::transformation() const
 void Shape::setTransform(Matrix M)
 {
     _transformation = M;
+}
+void Shape::addTransform(Matrix M)
+{
+    _transformation = _transformation >>= M;
+}
+void Sphere::restoreTransform()
+{
+    _transformation = RTC::scaling(_radius, _radius, _radius) >>=
+        RTC::translation(_center.x(), _center.y(), _center.z());
 }
 } // namespace RTC
