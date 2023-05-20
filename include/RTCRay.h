@@ -1,5 +1,7 @@
 #pragma once
 #include "RTCTuple.h"
+#include "RTCMatrix.h"
+#include <cmath>
 namespace RTC
 {
 class Ray
@@ -10,6 +12,7 @@ class Ray
     Tuple origin() const;
     Tuple direction() const;
     Tuple position(double t) const;
+    Ray transform(Matrix M) const;
 
   protected:
     Tuple _origin;

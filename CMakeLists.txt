@@ -32,7 +32,7 @@ target_link_libraries   ( RTCCanvas RTCColor )
 add_library             ( RTCTransformations lib/RTCTransformations.cpp )
 target_link_libraries   ( RTCTransformations RTCMatrix )
 add_library             ( RTCRay lib/RTCRay.cpp )
-target_link_libraries   ( RTCRay RTCTuple )
+target_link_libraries   ( RTCRay RTCTuple RTCMatrix RTCTransformations )
 add_library             ( RTCShape lib/RTCShape.cpp )
 target_link_libraries   ( RTCShape RTCTuple RTCRay )
 

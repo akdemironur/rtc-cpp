@@ -24,4 +24,8 @@ Tuple Ray::position(double t) const
 {
     return origin() + direction() * t;
 }
+Ray Ray::transform(Matrix M) const
+{
+    return Ray(M * origin(), M * direction());
+}
 } // namespace RTC
