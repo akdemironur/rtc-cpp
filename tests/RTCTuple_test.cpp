@@ -104,3 +104,14 @@ TEST_CASE("Tuple, cross product", "[Tuple]")
     REQUIRE(RTC::cross(a, b) == RTC::Vector(-1, 2, -1));
     REQUIRE(RTC::cross(b, a) == RTC::Vector(1, -2, 1));
 }
+TEST_CASE("Tuple, reflect", "[Tuple]")
+{
+    auto v = RTC::Vector(0, -1, 0);
+    auto n = RTC::Vector(std::sqrt(2) / 2, std::sqrt(2) / 2, 0);
+    auto r = RTC::reflect(v, n);
+    REQUIRE(r == RTC::Vector(1, 0, 0));
+    v = RTC::Vector(1, -1, 0);
+    n = RTC::Vector(0, 1, 0);
+    r = RTC::reflect(v, n);
+    REQUIRE(r == RTC::Vector(1, 1, 0));
+}

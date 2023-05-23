@@ -129,4 +129,8 @@ Tuple cross(const Tuple &a, const Tuple &b)
 {
     return Vector(a.y() * b.z() - a.z() * b.y(), a.z() * b.x() - a.x() * b.z(), a.x() * b.y() - a.y() * b.x());
 }
+Tuple reflect(const Tuple &in, const Tuple &normal)
+{
+    return in - normal * 2 * dot(in, normal);
+}
 } // namespace RTC
