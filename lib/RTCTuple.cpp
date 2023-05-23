@@ -55,6 +55,11 @@ bool Tuple::isVector() const
 {
     return approxEqual(e[3], 0.0);
 }
+Tuple &Tuple::vectorize()
+{
+    e[3] = 0;
+    return *this;
+}
 Tuple Tuple::getNorm() const
 {
     auto mag = magnitude();

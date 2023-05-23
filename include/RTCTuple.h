@@ -20,6 +20,7 @@ class Tuple
     bool isVector() const;
     Tuple getNorm() const;
     Tuple operator-() const;
+    Tuple &vectorize();
 
   protected:
     std::vector<double> e;

@@ -3,6 +3,14 @@
 #include "RTCTransformations.h"
 namespace RTC
 {
+Tuple Sphere::normalAt(Tuple wp)
+{
+    auto p = wp >>= transformation().getInverse();
+    auto objectNormal = p - _center;
+    auto worldNormal = objectNormal >>= transformation().getInverse().transpose();
+    return worldNormal.vectorize().getNorm();
+}
+
 Sphere::Sphere()
 {
     _center = RTC::Point(0, 0, 0);

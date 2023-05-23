@@ -52,6 +52,10 @@ add_executable( RTCRay_test tests/RTCRay_test.cpp )
 target_link_libraries( RTCRay_test PRIVATE Catch2::Catch2WithMain RTCRay RTCShape )
 add_test( NAME RTCRay_test COMMAND RTCRay_test )
 
+add_executable( RTCSphere_test tests/RTCSphere_test.cpp )
+target_link_libraries( RTCSphere_test PRIVATE Catch2::Catch2WithMain RTCRay RTCShape )
+add_test( NAME RTCSphere_test COMMAND RTCSphere_test )
+
 add_executable( RTCCanvas_test tests/RTCCanvas_test.cpp )
 target_link_libraries( RTCCanvas_test PRIVATE Catch2::Catch2WithMain RTCCanvas RTCColor)
 add_test( NAME RTCCanvas_test COMMAND RTCCanvas_test )

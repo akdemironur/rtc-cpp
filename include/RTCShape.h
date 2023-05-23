@@ -15,6 +15,7 @@ class Shape
     void setTransform(Matrix M);
     void addTransform(Matrix M);
     virtual void restoreTransform() = 0;
+    virtual Tuple normalAt(Tuple p) = 0;
 
   protected:
     std::vector<double> _intersections;
@@ -30,6 +31,7 @@ class Sphere : public Shape
     double radius() const;
     std::pair<std::vector<double>, const Shape &> intersect(const Ray &r);
     void restoreTransform();
+    Tuple normalAt(Tuple p);
 
   protected:
     Tuple _center;
