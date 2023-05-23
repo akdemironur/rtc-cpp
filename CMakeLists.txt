@@ -35,10 +35,22 @@ add_library             ( RTCRay lib/RTCRay.cpp )
 target_link_libraries   ( RTCRay RTCTuple RTCMatrix RTCTransformations )
 add_library             ( RTCShape lib/RTCShape.cpp )
 target_link_libraries   ( RTCShape RTCTuple RTCRay )
+add_library             ( RTCLight lib/RTCLight.cpp )
+target_link_libraries   ( RTCLight RTCTuple RTCColor )
+add_library             ( RTCMaterial lib/RTCMaterial.cpp )
+target_link_libraries   ( RTCMaterial RTCColor )
 
 add_executable( RTCTuple_test tests/RTCTuple_test.cpp )
 target_link_libraries( RTCTuple_test PRIVATE Catch2::Catch2WithMain RTCTuple )
 add_test( NAME RTCTuple_test COMMAND RTCTuple_test )
+
+add_executable( RTCLight_test tests/RTCLight_test.cpp )
+target_link_libraries( RTCLight_test PRIVATE Catch2::Catch2WithMain RTCLight )
+add_test( NAME RTCLight_test COMMAND RTCLight_test )
+
+add_executable( RTCMaterial_test tests/RTCMaterial_test.cpp )
+target_link_libraries( RTCMaterial_test PRIVATE Catch2::Catch2WithMain RTCMaterial )
+add_test( NAME RTCMaterial_test COMMAND RTCMaterial_test )
 
 add_executable( RTCTransformations_test tests/RTCTransformations_test.cpp )
 target_link_libraries( RTCTransformations_test PRIVATE Catch2::Catch2WithMain RTCTransformations )
