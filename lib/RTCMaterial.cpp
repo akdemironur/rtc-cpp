@@ -1,4 +1,5 @@
 #include "RTCMaterial.h"
+#include "RTCCommon.h"
 namespace RTC
 {
 
@@ -52,5 +53,12 @@ void Material::setShininess(double shininess)
 void Material::setColor(Color color)
 {
     _color = color;
+}
+
+bool operator==(const Material &a, const Material &b)
+{
+    return (approxEqual(a.ambient(), b.ambient()) && approxEqual(a.diffuse(), b.diffuse()) &&
+            approxEqual(a.shininess(), b.shininess()) && approxEqual(a.specular(), b.specular()) &&
+            a.color() == b.color());
 }
 } // namespace RTC

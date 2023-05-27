@@ -25,4 +25,6 @@ class Material
     double _shininess{200.0};
     Color _color{RTC::Color(1, 1, 1)};
 };
+
+extern bool operator==(const Material &a, const Material &b);
 } // namespace RTC

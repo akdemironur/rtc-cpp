@@ -1,4 +1,5 @@
 #include "RTCTuple.h"
+#include <iostream>
 namespace RTC
 {
 Tuple::Tuple()
@@ -132,5 +133,11 @@ Tuple cross(const Tuple &a, const Tuple &b)
 Tuple reflect(const Tuple &in, const Tuple &normal)
 {
     return in - normal * 2 * dot(in, normal);
+}
+
+std::ostream &operator<<(std::ostream &os, const Tuple &c)
+{
+    os << c.x() << " " << c.y() << " " << c.z();
+    return os;
 }
 } // namespace RTC

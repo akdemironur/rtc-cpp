@@ -1,3 +1,4 @@
+#include "RTCMaterial.h"
 #include "RTCMatrix.h"
 #include "RTCTransformations.h"
 #include "RTCTuple.h"
@@ -26,4 +27,13 @@ TEST_CASE("Sphere normal at", "[Matrix]")
     s.setTransform(RTC::rotation_z(std::numbers::pi / 5) >>= RTC::scaling(1, 0.5, 1));
     n = s.normalAt(RTC::Point(0, std::sqrt(2) / 2, -std::sqrt(2) / 2));
     REQUIRE(n == RTC::Vector(0, 0.97014, -0.24254));
+}
+TEST_CASE("Sphere material", "[MatSphere]")
+{
+    auto s = RTC::Sphere();
+    REQUIRE(s.material == RTC::Material());
+    auto m = RTC::Material();
+    m.setAmbient(1);
+    s.material = m;
+    REQUIRE(s.material == m);
 }

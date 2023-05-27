@@ -12,6 +12,7 @@ class Color : public Tuple
     double red() const;
     double green() const;
     double blue() const;
+    void operator=(const Tuple &a);
 };
 
 extern std::ostream &operator<<(std::ostream &os, const Color &c);

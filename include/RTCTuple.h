@@ -39,4 +39,5 @@ extern Tuple Point(double x, double y, double z);
 extern double dot(const Tuple &a, const Tuple &b);
 extern Tuple cross(const Tuple &a, const Tuple &b);
 extern Tuple reflect(const Tuple &in, const Tuple &normal);
+extern std::ostream &operator<<(std::ostream &os, const Tuple &c);
 } // namespace RTC

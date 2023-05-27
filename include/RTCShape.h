@@ -2,6 +2,7 @@
 #include "RTCTuple.h"
 #include "RTCRay.h"
 #include "RTCMatrix.h"
+#include "RTCMaterial.h"
 #include <utility>
 #include <optional>
 namespace RTC
@@ -16,6 +17,7 @@ class Shape
     void addTransform(Matrix M);
     virtual void restoreTransform() = 0;
     virtual Tuple normalAt(Tuple p) = 0;
+    Material material{};
 
   protected:
     std::vector<double> _intersections;

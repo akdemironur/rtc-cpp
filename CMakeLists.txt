@@ -15,6 +15,12 @@ FetchContent_Declare(
 
 FetchContent_MakeAvailable(Catch2)
 
+if(NOT CMAKE_BUILD_TYPE)
+  set(CMAKE_BUILD_TYPE Release)
+endif()
+set(CMAKE_CXX_FLAGS "-Wall -Wextra -ffast-math")
+set(CMAKE_CXX_FLAGS_RELEASE "-Ofast")
+
 include_directories (${CMAKE_SOURCE_DIR}/include)
 
 add_library             ( RTCCommon lib/RTCCommon.cpp )
@@ -34,7 +40,7 @@ target_link_libraries   ( RTCTransformations RTCMatrix )
 add_library             ( RTCRay lib/RTCRay.cpp )
 target_link_libraries   ( RTCRay RTCTuple RTCMatrix RTCTransformations )
 add_library             ( RTCShape lib/RTCShape.cpp )
-target_link_libraries   ( RTCShape RTCTuple RTCRay )
+target_link_libraries   ( RTCShape RTCTuple RTCRay RTCMaterial )
 add_library             ( RTCLight lib/RTCLight.cpp )
 target_link_libraries   ( RTCLight RTCTuple RTCColor )
 add_library             ( RTCMaterial lib/RTCMaterial.cpp )
@@ -45,11 +51,11 @@ target_link_libraries( RTCTuple_test PRIVATE Catch2::Catch2WithMain RTCTuple )
 add_test( NAME RTCTuple_test COMMAND RTCTuple_test )
 
 add_executable( RTCLight_test tests/RTCLight_test.cpp )
-target_link_libraries( RTCLight_test PRIVATE Catch2::Catch2WithMain RTCLight )
+target_link_libraries( RTCLight_test PRIVATE Catch2::Catch2WithMain RTCLight RTCMaterial )
 add_test( NAME RTCLight_test COMMAND RTCLight_test )
 
 add_executable( RTCMaterial_test tests/RTCMaterial_test.cpp )
-target_link_libraries( RTCMaterial_test PRIVATE Catch2::Catch2WithMain RTCMaterial )
+target_link_libraries( RTCMaterial_test PRIVATE Catch2::Catch2WithMain RTCMaterial RTCLight )
 add_test( NAME RTCMaterial_test COMMAND RTCMaterial_test )
 
 add_executable( RTCTransformations_test tests/RTCTransformations_test.cpp )
@@ -77,4 +83,4 @@ target_link_libraries( RTCMatrix_test PRIVATE Catch2::Catch2WithMain RTCMatrix )
 add_test( NAME RTCMatrix_test COMMAND RTCMatrix_test )
 
 add_executable          ( RTC src/RTC.cpp )
-target_link_libraries   ( RTC  RTCColor RTCCanvas RTCTick RTCTransformations RTCRay RTCShape )
+target_link_libraries   ( RTC  RTCColor RTCCanvas RTCTick RTCTransformations RTCRay RTCShape RTCLight RTCMaterial )

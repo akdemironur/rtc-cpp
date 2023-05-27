@@ -40,5 +40,12 @@ std::ostream &operator<<(std::ostream &os, const Color &c)
     os << normColorComponent(c.red()) << " " << normColorComponent(c.green()) << " " << normColorComponent(c.blue());
     return os;
 }
+void Color::operator=(const Tuple &a)
+{
+    e[0] = a.x();
+    e[1] = a.y();
+    e[2] = a.z();
+    e[3] = 0;
+}
 
 } // namespace RTC

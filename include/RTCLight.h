@@ -1,6 +1,7 @@
 #pragma once
 #include "RTCColor.h"
 #include "RTCTuple.h"
+#include "RTCMaterial.h"
 namespace RTC
 {
 class Light
@@ -16,4 +17,5 @@ class Light
     Tuple _position;
 };
 
+extern Color lighting(Material material, Light light, Tuple point, Tuple eyev, Tuple normalv);
 } // namespace RTC
