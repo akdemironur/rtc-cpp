@@ -32,12 +32,12 @@ Matrix operator*(const Matrix &a, const Matrix &b)
     unsigned resultColumns = b.numColumns();
     std::vector<double> resultValues(resultRows * resultColumns);
     Matrix result(resultRows, resultColumns, resultValues);
-    for (auto row = 0; row < resultRows; row++)
+    for (unsigned row = 0; row < resultRows; row++)
     {
-        for (auto col = 0; col < resultColumns; col++)
+        for (unsigned col = 0; col < resultColumns; col++)
         {
             result(row, col) = 0;
-            for (auto i = 0; i < a.numColumns(); i++)
+            for (unsigned i = 0; i < a.numColumns(); i++)
             {
                 result(row, col) += a(row, i) * b(i, col);
             }
@@ -57,7 +57,7 @@ Matrix identityMatrix(unsigned size)
 {
     std::vector<double> values(size * size);
     Matrix id(size, size, values);
-    for (auto i = 0; i < size; i++)
+    for (unsigned i = 0; i < size; i++)
         id(i, i) = 1;
     return id;
 }
@@ -82,7 +82,7 @@ double Matrix::determinant() const
     if (this->numRows() == 1 && this->numColumns() == 1)
         return (*this)(0, 0);
     double det = 0;
-    for (auto c = 0; c < this->numColumns(); c++)
+    for (unsigned c = 0; c < this->numColumns(); c++)
     {
         det += this->cofactor(0, c) * (*this)(0, c);
     }
@@ -112,8 +112,8 @@ Matrix::Matrix(unsigned numRows, unsigned numColumns, std::vector<double> values
 Matrix &Matrix::transpose()
 {
     std::vector<double> transposedValues;
-    for (auto c = 0; c < this->numColumns(); c++)
-        for (auto r = 0; r < this->numRows(); r++)
+    for (unsigned c = 0; c < this->numColumns(); c++)
+        for (unsigned r = 0; r < this->numRows(); r++)
             transposedValues.push_back((*this)(r, c));
     std::swap(_numRows, _numColumns);
     _values = transposedValues;
@@ -145,9 +145,9 @@ std::ostream &operator<<(std::ostream &os, const Matrix &m)
 Matrix Matrix::submatrix(unsigned sr, unsigned sc) const
 {
     std::vector<double> subValues;
-    for (auto r = 0; r < this->numRows(); r++)
+    for (unsigned r = 0; r < this->numRows(); r++)
     {
-        for (auto c = 0; c < this->numColumns(); c++)
+        for (unsigned c = 0; c < this->numColumns(); c++)
         {
             if (!(c == sc || r == sr))
                 subValues.push_back((*this)(r, c));
@@ -165,9 +165,9 @@ Matrix Matrix::getInverse() const
     double det = this->determinant();
     std::vector<double> values;
     auto inv = Matrix(this->numRows(), this->numColumns(), values);
-    for (auto r = 0; r < this->numRows(); r++)
+    for (unsigned r = 0; r < this->numRows(); r++)
     {
-        for (auto c = 0; c < this->numColumns(); c++)
+        for (unsigned c = 0; c < this->numColumns(); c++)
         {
             inv(c, r) = this->cofactor(r, c) / det;
         }
