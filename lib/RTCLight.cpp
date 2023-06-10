@@ -52,4 +52,9 @@ Color lighting(Material material, Light light, Tuple point, Tuple eyev, Tuple no
     resultLight = ambient + diffuse + specular;
     return resultLight;
 }
+
+bool operator==(const Light &a, const Light &b)
+{
+    return (a.intensity() == b.intensity() && a.position() == b.position());
+}
 } // namespace RTC

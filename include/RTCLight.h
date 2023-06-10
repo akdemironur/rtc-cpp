@@ -4,6 +4,7 @@
 #include "RTCMaterial.h"
 namespace RTC
 {
+
 class Light
 {
   public:
@@ -17,5 +18,6 @@ class Light
     Tuple _position;
 };
 
+extern bool operator==(const Light &a, const Light &b);
 extern Color lighting(Material material, Light light, Tuple point, Tuple eyev, Tuple normalv);
 } // namespace RTC
