@@ -5,6 +5,7 @@
 #include "RTCMaterial.h"
 #include <utility>
 #include <optional>
+#include <algorithm>
 namespace RTC
 {
 class Shape
