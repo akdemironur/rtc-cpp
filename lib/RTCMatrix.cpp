@@ -131,15 +131,16 @@ const std::vector<double> &Matrix::values() const
 {
     return _values;
 }
-void Matrix::print() const
+
+std::ostream &operator<<(std::ostream &os, const Matrix &m)
 {
-    std::cout << "=====================\n";
-    std::cout << "Rows: " << _numRows << "\tCols: " << _numColumns << std::endl;
-    for (auto i : this->values())
+    os << "=====================\n";
+    os << "Rows: " << m.numRows() << "\tCols: " << m.numColumns() << std::endl;
+    for (auto i : m.values())
     {
-        std::cout << i << std::endl;
+        os << i << std::endl;
     }
-    std::cout << "=====================\n";
+    os << "=====================\n";
 }
 Matrix Matrix::submatrix(unsigned sr, unsigned sc) const
 {

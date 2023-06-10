@@ -16,7 +16,6 @@ class Matrix
     unsigned numRows() const;
     unsigned numColumns() const;
     const std::vector<double> &values() const;
-    void print() const;
     Matrix submatrix(unsigned sr, unsigned sc) const;
     double determinant() const;
     double cofactor(unsigned r, unsigned c) const;
@@ -35,6 +34,7 @@ extern bool operator!=(const Matrix &a, const Matrix &b);
 extern Matrix operator*(const Matrix &a, const Matrix &b);
 extern Tuple operator*(const Matrix &A, const Tuple &b);
 extern Matrix identityMatrix(unsigned size);
+extern std::ostream &operator<<(std::ostream &os, const Matrix &m);
 Matrix rowVector(const Tuple &a);
 Matrix columnVector(const Tuple &a);
 } // namespace RTC
